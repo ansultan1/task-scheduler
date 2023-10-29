@@ -3,6 +3,7 @@ package mongo
 import (
 	"context"
 	"fmt"
+
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 	"go.mongodb.org/mongo-driver/bson"
