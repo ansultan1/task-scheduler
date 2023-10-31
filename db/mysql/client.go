@@ -3,11 +3,12 @@ package mysql
 import (
 	"database/sql"
 	"fmt"
+	"strings"
+
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
-	"strings"
 	"task-scheduler/config"
 	"task-scheduler/db"
 	domainErr "task-scheduler/errors"
@@ -52,7 +53,7 @@ func NewClient(conf db.Option) (db.DataStore, error) {
 	return &client{db: cli}, nil
 }
 
-// AddTask allows the user to store a task in the database
+// AddOrUpdateTask allows the user to store a task in the database
 func (c *client) AddOrUpdateTask(task *models.Task) (string, error) {
 	if task == nil {
 

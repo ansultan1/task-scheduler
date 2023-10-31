@@ -10,7 +10,6 @@ type DataStore interface {
 	GetTask(id string) (*models.Task, error)
 	ListTasks() ([]*models.Task, error)
 	DeleteTask(id string) error
-	//UpdateTask(task *models.Task) error
 }
 
 // Option holds configuration for data store clients

@@ -1,8 +1,9 @@
 package models
 
 import (
-	"github.com/fatih/structs"
 	"time"
+
+	"github.com/fatih/structs"
 )
 
 type Task struct {

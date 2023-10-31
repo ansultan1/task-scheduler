@@ -3,10 +3,11 @@ package mongo
 import (
 	"fmt"
 	"os"
-	"task-scheduler/db"
-	"task-scheduler/models"
 	"testing"
 	"time"
+
+	"task-scheduler/db"
+	"task-scheduler/models"
 )
 
 func Test_client_AddOrUpdateTask(t *testing.T) {
@@ -23,12 +24,12 @@ func Test_client_AddOrUpdateTask(t *testing.T) {
 		// test cases
 		{
 			name:    "success - add task in db",
-			args:    args{task: &models.Task{ID: "9", Name: "AddTask", Command: "echo", ScheduledTime: time.Now(), Recurring: false, TimeZone: "UTC"}},
+			args:    args{task: &models.Task{ID: "9", Name: "AddTask", Command: "echo", ScheduledTime: time.Date(2023, 10, 23, 21, 51, 22, 0, time.UTC), Recurring: false, TimeZone: "UTC"}},
 			wantErr: false,
 		},
 		{
 			name:    "fail - add invalid task in db",
-			args:    args{task: &models.Task{ID: "4", Name: "AddTask", Command: "echo khan world", ScheduledTime: time.Now(), Recurring: false, TimeZone: "UTC"}},
+			args:    args{task: &models.Task{ID: "4", Name: "AddTask", Command: "echo khan world", ScheduledTime: time.Date(2023, 10, 23, 21, 51, 22, 0, time.UTC), Recurring: false, TimeZone: "UTC"}},
 			wantErr: false,
 		},
 	}
