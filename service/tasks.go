@@ -14,13 +14,18 @@ import (
 var cronTasks = make(map[string]*cron.Cron)
 
 func (s *Service) executeTask(task *models.Task) error {
-	//  execute the task's
 	cmd := exec.Command("sh", "-c", task.Command)
-	return cmd.Run()
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		errors.New("task execution failed")
+	}
+	fmt.Println(string(output))
+	return err
 }
 
 // AddOrUpdateTask adds or update task into database
 func (s *Service) AddOrUpdateTask(task *models.Task) (string, error) {
+
 	if task == nil {
 
 		return "", errors.New("task is empty")
@@ -33,6 +38,11 @@ func (s *Service) AddOrUpdateTask(task *models.Task) (string, error) {
 		return "", errors.New("time zone is incorrect")
 	}
 
+	stringScheduled := task.ScheduledTime.Format("2006-01-02 15:04:05")
+	localTime, _ := time.ParseInLocation("2006-01-02 15:04:05", stringScheduled, loc)
+
+	task.ScheduledTime = localTime
+
 	// convert the scheduled time in utc to work with globally
 	task.ScheduledTime = task.ScheduledTime.In(loc).UTC()
 
@@ -44,12 +54,13 @@ func (s *Service) AddOrUpdateTask(task *models.Task) (string, error) {
 	// Generate a unique task name to identify by cron
 	taskName := fmt.Sprintf("task_%s", task.ID)
 
-	c := cron.New()
+	c := cron.New(cron.WithLocation(time.UTC))
 
 	cronTasks[taskName] = c
 
 	// Schedule the task to run at the specified time
-	schedule := fmt.Sprintf("%d %d %d %d %d %d", task.ScheduledTime.Second(), task.ScheduledTime.Minute(), task.ScheduledTime.Hour(), task.ScheduledTime.Weekday(), task.ScheduledTime.Month(), task.ScheduledTime.Year())
+	schedule := fmt.Sprintf("%d %d %d %d %d", task.ScheduledTime.Minute(), task.ScheduledTime.Hour(), task.ScheduledTime.Day(), task.ScheduledTime.Month(), task.ScheduledTime.Weekday())
+
 	c.AddFunc(schedule, func() {
 		// Execute the task concurrently using a goroutine
 		go func() {
@@ -60,7 +71,6 @@ func (s *Service) AddOrUpdateTask(task *models.Task) (string, error) {
 	})
 
 	c.Start()
-
 	return task.ID, nil
 }
 
