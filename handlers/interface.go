@@ -3,8 +3,8 @@ package handlers
 import (
 	"github.com/go-openapi/loads"
 
-	runtime "task-scheduler"
-	"task-scheduler/gen/restapi/operations"
+	runtime "github.com/ansultan1/task-scheduler"
+	"github.com/ansultan1/task-scheduler/gen/restapi/operations"
 )
 
 // Handler replaces swagger handler

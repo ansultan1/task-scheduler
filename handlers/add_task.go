@@ -4,10 +4,10 @@ import (
 	"time"
 
 	"github.com/go-openapi/runtime/middleware"
-	"task-scheduler/gen/restapi/operations"
 
-	runtime "task-scheduler"
-	"task-scheduler/models"
+	runtime "github.com/ansultan1/task-scheduler"
+	"github.com/ansultan1/task-scheduler/gen/restapi/operations"
+	"github.com/ansultan1/task-scheduler/models"
 )
 
 // NewAddTask handles request for saving task

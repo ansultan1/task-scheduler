@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 
-	"task-scheduler/gen/models"
+	"github.com/ansultan1/task-scheduler/gen/models"
 )
 
 // UpdateTaskOKCode is the HTTP code returned for type UpdateTaskOK

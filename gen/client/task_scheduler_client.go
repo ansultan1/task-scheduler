@@ -6,8 +6,7 @@ package client
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"task-scheduler/gen/client/operations"
-
+	"github.com/ansultan1/task-scheduler/gen/client/operations"
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"

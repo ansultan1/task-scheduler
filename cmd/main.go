@@ -6,10 +6,10 @@ import (
 	"github.com/go-openapi/loads"
 	"github.com/spf13/viper"
 
-	runtime "task-scheduler"
-	"task-scheduler/config"
-	"task-scheduler/gen/restapi"
-	"task-scheduler/handlers"
+	runtime "github.com/ansultan1/task-scheduler"
+	"github.com/ansultan1/task-scheduler/config"
+	"github.com/ansultan1/task-scheduler/gen/restapi"
+	"github.com/ansultan1/task-scheduler/handlers"
 )
 
 func main() {

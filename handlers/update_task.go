@@ -5,10 +5,10 @@ import (
 
 	"github.com/go-openapi/runtime/middleware"
 
-	runtime "task-scheduler"
-	domainErr "task-scheduler/errors"
-	"task-scheduler/gen/restapi/operations"
-	"task-scheduler/models"
+	runtime "github.com/ansultan1/task-scheduler"
+	domainErr "github.com/ansultan1/task-scheduler/errors"
+	"github.com/ansultan1/task-scheduler/gen/restapi/operations"
+	"github.com/ansultan1/task-scheduler/models"
 )
 
 // NewUpdateTask handles request for updating task

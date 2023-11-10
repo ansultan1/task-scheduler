@@ -3,9 +3,9 @@ package handlers
 import (
 	"github.com/go-openapi/runtime/middleware"
 
-	runtime "task-scheduler"
-	domainErr "task-scheduler/errors"
-	"task-scheduler/gen/restapi/operations"
+	runtime "github.com/ansultan1/task-scheduler"
+	domainErr "github.com/ansultan1/task-scheduler/errors"
+	"github.com/ansultan1/task-scheduler/gen/restapi/operations"
 )
 
 // NewDeleteTask function will delete the task

@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"task-scheduler/gen/models"
+	"github.com/ansultan1/task-scheduler/gen/models"
 )
 
 // NewAddTaskParams creates a new AddTaskParams object,

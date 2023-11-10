@@ -1,9 +1,9 @@
 package runtime
 
 import (
-	"task-scheduler/db"
-	"task-scheduler/db/mongo"
-	"task-scheduler/service"
+	"github.com/ansultan1/task-scheduler/db"
+	"github.com/ansultan1/task-scheduler/db/mongo"
+	"github.com/ansultan1/task-scheduler/service"
 )
 
 type Runtime struct {

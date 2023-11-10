@@ -9,10 +9,12 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
-	"task-scheduler/config"
-	"task-scheduler/db"
-	domainErr "task-scheduler/errors"
-	"task-scheduler/models"
+
+	"github.com/ansultan1/task-scheduler/config"
+	"github.com/ansultan1/task-scheduler/db"
+	domainErr "github.com/ansultan1/task-scheduler/errors"
+	"github.com/ansultan1/task-scheduler/models"
+	"sync"
 )
 
 const (
@@ -28,6 +30,11 @@ type client struct {
 	db *sqlx.DB
 }
 
+var (
+	mysqlClient *client
+	mysqlOnce   sync.Once
+)
+
 // FormatDSN generates a Data Source Name (DSN) for MySQL from configuration
 func FormatDSN() string {
 
@@ -42,15 +49,18 @@ func FormatDSN() string {
 
 // NewClient initializes a mysql database connection
 func NewClient(conf db.Option) (db.DataStore, error) {
-	log().Info("initializing mysql connection: " + FormatDSN())
+	mysqlOnce.Do(func() {
+		log().Info("initializing mysql connection: " + FormatDSN())
 
-	cli, err := sqlx.Connect("mysql", FormatDSN())
-	if err != nil {
+		cli, err := sqlx.Connect("mysql", FormatDSN())
+		if err != nil {
+			errors.Wrap(err, "failed to connect to MongoDB")
+			return
+		}
+		mysqlClient = &client{db: cli}
+	})
 
-		return nil, errors.Wrap(err, "failed to connect to db")
-	}
-
-	return &client{db: cli}, nil
+	return mysqlClient, nil
 }
 
 // AddOrUpdateTask allows the user to store a task in the database

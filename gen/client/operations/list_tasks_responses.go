@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"task-scheduler/gen/models"
+	"github.com/ansultan1/task-scheduler/gen/models"
 )
 
 // ListTasksReader is a Reader for the ListTasks structure.

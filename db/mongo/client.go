@@ -3,16 +3,18 @@ package mongo
 import (
 	"context"
 	"fmt"
+	"sync"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"task-scheduler/config"
-	"task-scheduler/db"
-	domainErr "task-scheduler/errors"
-	"task-scheduler/models"
+
+	"github.com/ansultan1/task-scheduler/config"
+	"github.com/ansultan1/task-scheduler/db"
+	domainerr "github.com/ansultan1/task-scheduler/errors"
+	"github.com/ansultan1/task-scheduler/models"
 )
 
 const (
@@ -27,18 +29,27 @@ type client struct {
 	conn *mongo.Client
 }
 
-// NewClient initializes a mysql database connection
+var (
+	mongoClient *client
+	mongoOnce   sync.Once
+)
+
+// NewClient initializes a MongoDB database connection
 func NewClient(conf db.Option) (db.DataStore, error) {
-	uri := fmt.Sprintf("mongodb://%s:%s", viper.GetString(config.DbHost), viper.GetString(config.DbPort))
-	log().Infof("initializing mongodb: %s", uri)
+	mongoOnce.Do(func() {
+		uri := fmt.Sprintf("mongodb://%s:%s", viper.GetString(config.DbHost), viper.GetString(config.DbPort))
+		log().Infof("initializing MongoDB: %s", uri)
 
-	cli, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
-	if err != nil {
+		cli, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
+		if err != nil {
+			errors.Wrap(err, "failed to connect to MongoDB")
+			return
+		}
 
-		return nil, errors.Wrap(err, "failed to connect to db")
-	}
+		mongoClient = &client{conn: cli}
+	})
 
-	return &client{conn: cli}, nil
+	return mongoClient, nil
 }
 
 // AddOrUpdateTask create or update task in the mongodb
@@ -65,7 +76,7 @@ func (c *client) GetTask(id string) (*models.Task, error) {
 	if err := collection.FindOne(context.TODO(), bson.M{"_id": id}).Decode(&tsk); err != nil {
 		if err == mongo.ErrNoDocuments {
 
-			return nil, domainErr.NewAPIError(domainErr.NotFound, fmt.Sprintf("task: %s not found", id))
+			return nil, domainerr.NewAPIError(domainerr.NotFound, fmt.Sprintf("task: %s not found", id))
 		}
 
 		return nil, err
