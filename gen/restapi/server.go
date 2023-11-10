@@ -24,7 +24,7 @@ import (
 	flags "github.com/jessevdk/go-flags"
 	"golang.org/x/net/netutil"
 
-	"task-scheduler/gen/restapi/operations"
+	"github.com/ansultan1/task-scheduler/gen/restapi/operations"
 )
 
 const (

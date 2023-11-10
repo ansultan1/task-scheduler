@@ -6,10 +6,10 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/strfmt"
 
-	runtime "task-scheduler"
-	domainErr "task-scheduler/errors"
-	"task-scheduler/gen/models"
-	"task-scheduler/gen/restapi/operations"
+	runtime "github.com/ansultan1/task-scheduler"
+	domainErr "github.com/ansultan1/task-scheduler/errors"
+	"github.com/ansultan1/task-scheduler/gen/models"
+	"github.com/ansultan1/task-scheduler/gen/restapi/operations"
 )
 
 // NewListTasks handles a request for listing tasks

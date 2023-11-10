@@ -10,7 +10,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 
-	"task-scheduler/gen/restapi/operations"
+	"github.com/ansultan1/task-scheduler/gen/restapi/operations"
 )
 
 //go:generate swagger generate server --target ../../gen --name TaskScheduler --spec ../../swagger.yaml --principal interface{} --exclude-main

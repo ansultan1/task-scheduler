@@ -2,7 +2,8 @@ package db
 
 import (
 	"log"
-	"task-scheduler/models"
+
+	"github.com/ansultan1/task-scheduler/models"
 )
 
 type DataStore interface {

@@ -8,7 +8,8 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/robfig/cron/v3"
-	"task-scheduler/models"
+
+	"github.com/ansultan1/task-scheduler/models"
 )
 
 var cronTasks = make(map[string]*cron.Cron)

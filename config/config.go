@@ -29,7 +29,7 @@ func init() {
 	_ = viper.BindEnv(ServerPort, "SERVER_PORT")
 
 	// defaults
-	viper.SetDefault(DbName, "task_schedular")
+	viper.SetDefault(DbName, "task_scheduler")
 	viper.SetDefault(DbHost, "localhost")
 	viper.SetDefault(DbPort, "27017")
 

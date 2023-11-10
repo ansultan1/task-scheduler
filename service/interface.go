@@ -1,7 +1,7 @@
 package service
 
 import (
-	"task-scheduler/db"
+	"github.com/ansultan1/task-scheduler/db"
 )
 
 // Service initializes our database instance

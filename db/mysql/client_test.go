@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"task-scheduler/db"
-	"task-scheduler/models"
+	"github.com/ansultan1/task-scheduler/db"
+	"github.com/ansultan1/task-scheduler/models"
 )
 
 func Test_client_AddOrUpdateTask(t *testing.T) {
@@ -121,8 +121,6 @@ func Test_client_ListTask(t *testing.T) {
 			for _, task := range got {
 				fmt.Printf("Task ID: %s\n", task.ID)
 				fmt.Printf("Task Name: %s\n", task.Name)
-				// Print other task fields as needed
-				fmt.Println()
 			}
 		})
 	}

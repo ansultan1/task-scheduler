@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/validate"
 
-	"task-scheduler/gen/models"
+	"github.com/ansultan1/task-scheduler/gen/models"
 )
 
 // NewUpdateTaskParams creates a new UpdateTaskParams object

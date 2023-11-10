@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"task-scheduler/db"
-	"task-scheduler/models"
+	"github.com/ansultan1/task-scheduler/db"
+	"github.com/ansultan1/task-scheduler/models"
 )
 
 func Test_client_AddOrUpdateTask(t *testing.T) {
@@ -79,13 +79,13 @@ func Test_client_GetTask(t *testing.T) {
 
 	for _, testCase := range tests {
 		t.Run(testCase.name, func(t *testing.T) {
-			got, err := c.GetTask(testCase.args.id)
+			_, err := c.GetTask(testCase.args.id)
 			if (err != nil) != testCase.wantErr {
 				t.Errorf("GetTask() error = %v, wantErr %v", err, testCase.wantErr)
 				return
 			}
 
-			fmt.Printf("got: %#v\n", got)
+			//fmt.Printf("got: %#v\n", got)
 
 		})
 	}
